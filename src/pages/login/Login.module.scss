@@ -107,6 +107,9 @@
       color: white;
       background-color: var(--color-primary-dark);
       cursor: pointer;
+      span{
+        font-size: 0.9em;
+      }
     }
   }
   span {

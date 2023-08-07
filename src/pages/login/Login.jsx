@@ -9,9 +9,10 @@ import { BiHide, BiShow } from "react-icons/bi";
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../../components/loaders/loader/Loader";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  
+  const [isLoading, setSLoading] = useState(false);
   const{values, errors, touched, handleChange, handleBlur, handleSubmit: formikHandleSubmit}=useFormik({
     initialValues:{Email:'',Password:''},
     validationSchema:login_form_schema,
@@ -41,7 +42,7 @@ const Login = () => {
       <div className={classes.container_div_center}>
         <div className={classes.heading_div}>
           <h2>Sign in to your account</h2>
-          <p>Welcome back! Select a method to Log in.</p>
+          <p>Welcome back! Select a method to sign in.</p>
         </div>
         <div className={classes.button_google}>
           <FcGoogle /> Sign in with Google
@@ -65,7 +66,7 @@ const Login = () => {
             { !showPassword &&  <BiShow className={classes.hide_button} onClick={()=>setShowPassword(!showPassword)} />}
             { showPassword &&  <BiHide className={classes.hide_button} onClick={()=>setShowPassword(!showPassword)} />}
           </div>
-          <button type="submit">Sign In</button>
+          <button type="submit">{isLoading ? (<Loader/>) : <span>Sign In</span>} </button>
         </form>
         <span>
           Don't have an account? <Link to="/signup">Sign Up</Link>

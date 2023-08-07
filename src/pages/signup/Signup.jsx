@@ -9,8 +9,11 @@ import { BiHide, BiShow } from "react-icons/bi";
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../../components/loaders/loader/Loader";
 const Signup = () => {
+
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setSLoading] = useState(false);
   
   const{values, errors, touched, handleChange, handleBlur, handleSubmit: formikHandleSubmit}=useFormik({
     initialValues:{Name:'',Email:'',Password:''},
@@ -22,8 +25,6 @@ const Signup = () => {
     }
   })
 
-
-  
   const handleSubmit=(e)=>{
     e.preventDefault();
     console.log('handleSubmit')
@@ -73,7 +74,7 @@ const Signup = () => {
             { !showPassword &&  <BiShow className={classes.hide_button} onClick={()=>setShowPassword(!showPassword)} />}
             { showPassword &&  <BiHide className={classes.hide_button} onClick={()=>setShowPassword(!showPassword)} />}
           </div>
-          <button type="submit">Sign Up</button>
+          <button type="submit">{isLoading ? (<Loader/>) : <span>Sign Up</span>} </button>
         </form>
         <span>
           Already have an account? <Link to="/login">Sign In</Link>
