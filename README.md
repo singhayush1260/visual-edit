@@ -1,2 +1,2 @@
-ongoing project
+ongoing project: photo editing web app
 
