@@ -1,0 +1,9 @@
+@font-face {
+  font-family: gotham;
+  src: url("./assets/fonts/Gotham-HTF-Book.ttf");
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}/*# sourceMappingURL=App.css.map */

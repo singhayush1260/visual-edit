@@ -4,19 +4,19 @@
   --color-primary-dark: #0079FF;
   --color-primary-darker: #11009E;
   --color-grey-light: #444444;
-  --color-hover-pink: #EA1179;
 }
 
 a {
   text-decoration: none;
 }
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--color-primary-darker)
+  background: var(--color-primary-darker);
 }
 
 /* Handle */
@@ -29,5 +29,4 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary-dark);
   border-radius: 12px;
-}
-
+}/*# sourceMappingURL=index.css.map */
