@@ -8,6 +8,7 @@ import { CiUser, CiMail, CiUnlock } from "react-icons/ci";
 import { BiHide, BiShow } from "react-icons/bi";
 import { useState } from "react";
 import { toast } from 'react-toastify';
+import { motion } from "framer-motion";
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../../components/loaders/loader/Loader";
 const Signup = () => {
@@ -42,7 +43,13 @@ const Signup = () => {
 
   return (
     <PageWrapper>
-      <div className={classes.container_div_center}>
+      <motion.div 
+      className={classes.container_div_center}
+      initial={{width:0}} 
+      animate={{width:'45%'}} 
+      exit={{x:window.innerWidth}}
+      transition={{ duration: 0.5 }}
+      >
         <div className={classes.heading_div}>
           <h2>Create your account</h2>
           <p>Welcome! Select a method to Sign up.</p>
@@ -79,7 +86,7 @@ const Signup = () => {
         <span>
           Already have an account? <Link to="/login">Sign In</Link>
         </span>
-      </div>
+      </motion.div>
     </PageWrapper>
   );
 };

@@ -8,7 +8,8 @@
   gap: 0.7em;
   padding: 1.4em 0;
   background-color: white;
-  border-radius: 5px;
+  filter: drop-shadow(9px 14px 36px #11009E);
+  border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
 .container_div_center .heading_div h2 {
@@ -60,6 +61,15 @@
   align-items: center;
   gap: 1em;
 }
+.container_div_center form .input_error {
+  box-shadow: 0px 0px 2px red;
+}
+.container_div_center form .input_error svg {
+  color: red;
+}
+.container_div_center form .input_error .hide_button {
+  color: black;
+}
 .container_div_center form .form_controller {
   width: 90%;
   height: 2em;
@@ -81,9 +91,12 @@
   cursor: pointer;
   font-size: 0.7em;
 }
+.container_div_center form .form_controller .hide_button:hover {
+  transform: scale(1.1);
+}
 .container_div_center form button {
   width: 90%;
-  height: 18%;
+  height: 3em;
   padding: 1em;
   display: flex;
   justify-content: center;
@@ -95,9 +108,35 @@
   background-color: var(--color-primary-dark);
   cursor: pointer;
 }
+.container_div_center form button span {
+  font-size: 0.9em;
+}
 .container_div_center span {
   font-size: 0.6em;
 }
 .container_div_center span a {
   color: var(--color-primary-dark);
+}
+
+@media (min-width: 320px) and (max-width: 486px) {
+  .container_div_center {
+    justify-content: center;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+  }
+  .container_div_center form {
+    height: 150px;
+  }
+}
+@media (min-width: 487px) and (max-width: 786px) {
+  .container_div_center {
+    justify-content: center;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+  }
+  .container_div_center form {
+    height: 150px;
+  }
 }/*# sourceMappingURL=Login.module.css.map */

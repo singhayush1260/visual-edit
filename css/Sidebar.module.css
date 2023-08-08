@@ -1,0 +1,184 @@
+.sidebar {
+  height: 100vh;
+  min-height: 100%;
+  font-family: gotham;
+  font-weight: 500;
+  background-color: #0e2954;
+  color: white;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  position: fixed;
+  left: 0;
+}
+.sidebar .close,
+.sidebar .open {
+  position: absolute;
+  right: -10px;
+  top: 45px;
+  font-size: 1.5em;
+  z-index: 999;
+  cursor: pointer;
+}
+.sidebar .logo {
+  height: 20%;
+}
+.sidebar .menus,
+.sidebar .account {
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar .menus div,
+.sidebar .account div {
+  width: 100%;
+  height: 20%;
+  cursor: pointer;
+}
+.sidebar .menus div svg,
+.sidebar .account div svg {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.sidebar .menus div svg:hover,
+.sidebar .account div svg:hover {
+  transform: scale(1.1);
+}
+.sidebar .menus div.active,
+.sidebar .account div.active {
+  background-color: #1d267d;
+}
+.sidebar .menus div:hover,
+.sidebar .account div:hover {
+  background-color: #1d267d;
+}
+
+.expanded_sidebar {
+  width: 13%;
+  padding-left: 0.5em;
+}
+.expanded_sidebar .logo {
+  width: 100%;
+  padding-top: 2em;
+}
+.expanded_sidebar .menus,
+.expanded_sidebar .account {
+  width: 90%;
+  gap: 0.2em;
+}
+.expanded_sidebar .menus div,
+.expanded_sidebar .account div {
+  padding-left: 0.4em;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 0.8em;
+  border-radius: 5px;
+  font-size: 0.9em;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+.expanded_sidebar .account {
+  height: 40%;
+  border-top: 0.4px solid var(--color-grey-light);
+}
+.expanded_sidebar .account .user_dp {
+  height: 35%;
+  border: none;
+}
+.expanded_sidebar .account .user_dp img {
+  max-width: 65%;
+  max-height: 65%;
+  margin-left: 2em;
+}
+.expanded_sidebar .account .user_dp:hover {
+  background-color: transparent;
+  cursor: auto;
+}
+
+.contracted_sidebar {
+  width: 4%;
+  padding-left: 0.2em;
+}
+.contracted_sidebar .menus,
+.contracted_sidebar .account {
+  width: 85%;
+  gap: 0.3em;
+}
+.contracted_sidebar .menus div,
+.contracted_sidebar .account div {
+  width: 100%;
+  height: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+.contracted_sidebar .menus div span,
+.contracted_sidebar .account div span {
+  display: none;
+}
+.contracted_sidebar .account {
+  height: 40%;
+}
+.contracted_sidebar .account .user_dp {
+  display: none;
+}
+
+@media (min-width: 100px) and (max-width: 319px) {
+  .mobile_view {
+    width: 100%;
+    align-items: center;
+  }
+}
+@media (min-width: 320px) and (max-width: 486px) {
+  .sidebar.mobile_view {
+    width: 100%;
+    align-items: center;
+    font-size: 26px;
+  }
+  .sidebar.mobile_view .logo {
+    display: flex;
+    gap: 3em;
+    padding: 1em;
+  }
+  .sidebar.mobile_view .logo svg {
+    font-size: 1.8em;
+  }
+  .sidebar.mobile_view .menus, .sidebar.mobile_view .account {
+    width: 100%;
+  }
+  .sidebar.mobile_view.contracted_sidebar {
+    display: none;
+  }
+}
+@media (min-width: 487px) and (max-width: 786px) {
+  .sidebar.mobile_view {
+    width: 50%;
+    align-items: center;
+    font-size: 26px;
+  }
+  .sidebar.mobile_view .logo {
+    display: flex;
+    gap: 3em;
+    padding: 1em;
+  }
+  .sidebar.mobile_view .logo svg {
+    font-size: 1.8em;
+  }
+  .sidebar.mobile_view .menus, .sidebar.mobile_view .account {
+    width: 100%;
+  }
+  .sidebar.mobile_view.contracted_sidebar {
+    display: none;
+  }
+}
+.hide_sidebar {
+  display: none;
+}/*# sourceMappingURL=Sidebar.module.css.map */

@@ -1,9 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pacifico&display=swap");
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --color-primary-light:#068FFF;
   --color-primary-dark: #0079FF;
   --color-primary-darker: #11009E;
   --color-grey-light: #444444;
+  --color-hover-pink: #EA1179;
+  --color-sidebar:#0E2954;
+  --color-offwhite:#F5F5F5;
+  --font-pacifico: pa ;
 }
 
 a {

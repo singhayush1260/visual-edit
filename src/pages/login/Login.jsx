@@ -4,9 +4,10 @@ import {useFormik} from 'formik';
 import {login_form_schema} from './login_form_schema';
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { CiUser, CiMail, CiUnlock } from "react-icons/ci";
+import { CiMail, CiUnlock } from "react-icons/ci";
 import { BiHide, BiShow } from "react-icons/bi";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from "../../components/loaders/loader/Loader";
@@ -39,7 +40,13 @@ const Login = () => {
 
   return (
     <PageWrapper>
-      <div className={classes.container_div_center}>
+      <motion.div 
+      className={classes.container_div_center}
+      initial={{width:0}} 
+      animate={{width:'45%'}} 
+      exit={{x:window.innerWidth}}
+      transition={{ duration: 0.5 }}
+      >
         <div className={classes.heading_div}>
           <h2>Sign in to your account</h2>
           <p>Welcome back! Select a method to sign in.</p>
@@ -71,7 +78,7 @@ const Login = () => {
         <span>
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </span>
-      </div>
+      </motion.div>
     </PageWrapper>
   );
 };
