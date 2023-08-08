@@ -40,7 +40,7 @@ const Login = () => {
 
   return (
     <PageWrapper>
-      <motion.div 
+      <div 
       className={classes.container_div_center}
       initial={{width:0}} 
       animate={{width:'45%'}} 
@@ -78,7 +78,7 @@ const Login = () => {
         <span>
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </span>
-      </motion.div>
+      </div>
     </PageWrapper>
   );
 };
