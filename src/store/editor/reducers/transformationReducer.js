@@ -1,17 +1,13 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-  crop: {
-    x: 0,
-    y: 0,
-    width: 100,
-    height: 100,
-  },
+  cropData: { aspect: 16 / 9 },
   rotation: 0,
   resizing: false,
-  // ...other transformation properties
 };
 
 export const transformationReducer = createReducer(initialState, {
-  // ...transformation action cases
+  crop: (state, action) => {
+    state.cropData = action.payload
+  },
 });

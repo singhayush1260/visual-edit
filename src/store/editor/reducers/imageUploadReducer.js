@@ -4,7 +4,7 @@ const initialState = {
   selectedImage: "",
 };
 
-export const imageReducer = createReducer(initialState, {
+export const imageUploadReducer = createReducer(initialState, {
   upload: (state, action) => {
     state.selectedImage = action.payload;
   },
