@@ -12,6 +12,7 @@
   background-image: url('../../assets/images/stacked-waves.svg');
   background-repeat: no-repeat;
   background-size:cover;
+  overflow: hidden;
 }
 @media (min-width: 320px) and (max-width: 486px) {
   .page_wrapper{

@@ -42,10 +42,6 @@ const Login = () => {
     <PageWrapper>
       <div 
       className={classes.container_div_center}
-      initial={{width:0}} 
-      animate={{width:'45%'}} 
-      exit={{x:window.innerWidth}}
-      transition={{ duration: 0.5 }}
       >
         <div className={classes.heading_div}>
           <h2>Sign in to your account</h2>
