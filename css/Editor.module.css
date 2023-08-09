@@ -6,6 +6,7 @@
   align-items: center;
   gap: 0.7em;
   background-color: #ccc;
+  overflow: hidden;
 }
 
 @media (min-width: 100px) and (max-width: 319px) {

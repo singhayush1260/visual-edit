@@ -13,6 +13,9 @@ const initialState = {
 };
 
 export const imageAdjustmentsReducer = createReducer(initialState, {
+  defaultZoom: (state) => {
+    state.zoomLevel = 1;
+  },
   zoomIn: (state) => {
     state.zoomLevel += 0.1;
   },

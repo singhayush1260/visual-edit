@@ -1,19 +1,16 @@
 import { useState } from "react";
 import classes from "./ImageCanvas.module.scss";
-import { FcAddImage } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
+import ImageUpload from "./upload-image/UploadImage";
 const ImageCanvas = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [crop, setCrop] = useState({  aspect: 16 / 9 });
   const { zoomLevel } = useSelector((state) => state.imageAdjustmentsReducer);
+  const { selectedImage } = useSelector((state) => state.imageReducer);
   const dispatch = useDispatch();
-
-  const handleImageUpload = (e) => {
-    const image = e.target.files[0];
-    console.log(image);
-    setSelectedImage(image);
-  };
+  
 
   const handleScrollZoom = (e) => {
     const delta = e.deltaY;
@@ -24,6 +21,7 @@ const ImageCanvas = () => {
       dispatch({ type: "zoomIn" });
     }
   };
+
 
   return (
     <motion.div
@@ -36,22 +34,11 @@ const ImageCanvas = () => {
       <div className={classes.container_center}
         style={{ transform: `scale(${zoomLevel})` }}
         onWheel={(e) => selectedImage && handleScrollZoom(e)}
-      >
-        <div className={`${classes.input_div} ${ selectedImage && classes.hide_input }`} >
-          <label htmlFor="image_upload">
-            <FcAddImage />
-          </label>
-          <p>
-            Drop your image here, or<label htmlFor="image_upload"> browse</label>
-          </p>
-          <input
-            type="file"
-            id="image_upload"
-            onChange={(e) => handleImageUpload(e)}
-          />
-        </div>
-        {selectedImage && (
-          <img src={URL.createObjectURL(selectedImage)} alt="Preview" /> )}
+      >  
+       <ImageUpload/>
+        { selectedImage && <ReactCrop   crop={crop} onChange={(newC)=>setCrop(newC)}  onComplete={(e)=>{setCrop(e); console.log(e)}}>
+        <img src={selectedImage} alt="Preview" />
+          </ReactCrop>}
       </div>
     </motion.div>
   );

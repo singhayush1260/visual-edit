@@ -5,7 +5,8 @@ import "./index.scss";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./error-boundary/ErrorBoundary.jsx";
-import editorStore from "./store/editor/editor_store.js";
+import editorStore from "./store/editor/editorStore.js";
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

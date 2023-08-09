@@ -1,44 +1,110 @@
 .edit_panel {
   font-size: 24px;
-  height: 100%;
+  font-family: gotham;
+  min-height: 100vh;
+  height: auto;
   width: 25%;
   background-color: #0E2954;
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-}
-.edit_panel .buttons_div {
-  width: 55%;
-  height: 10%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  gap: 1em;
+  align-items: center;
+  gap: 0.7em;
+  overflow: auto;
+  padding-bottom: 1em;
 }
-.edit_panel .buttons_div button {
-  --bg: #e74c3c;
-  --text-color: #fff;
-  position: relative;
-  width: 150px;
-  border: none;
-  background: var(--bg);
-  color: var(--text-color);
-  padding: 1em;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: 0.2s;
-  border-radius: 5px;
-  opacity: 0.8;
-  letter-spacing: 1px;
-  box-shadow: #c0392b 0px 7px 2px, #000 0px 8px 5px;
+.edit_panel .button_div {
+  width: 90%;
+  height: 12%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.5em;
+}
+.edit_panel .button_div button {
+  border-radius: 10px;
+  height: 50%;
+  width: 28%;
+  border: 0;
+  background-color: var(--color-primary-red);
+  letter-spacing: 1.5px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
+  color: hsl(0, 0%, 100%);
+}
+.edit_panel .button_div button:hover {
+  box-shadow: rgb(201, 46, 70) 0px 7px 0px 0px;
   cursor: pointer;
 }
-.edit_panel .buttons_div button:hover {
-  opacity: 1;
+.edit_panel .button_div button:active {
+  background-color: var(--color-primary-red);
+  /*50, 168, 80*/
+  box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
 }
-.edit_panel .buttons_div button:active {
-  top: 4px;
-  box-shadow: #c0392b 0px 3px 2px, #000 0px 3px 5px;
+.edit_panel .edit_container {
+  width: 90%;
+  min-height: 10%;
+  height: auto;
+  color: white;
+  background-color: #1d267d;
+  padding: 0 0.5em;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.edit_panel .edit_container small {
+  font-size: 0.5em;
+  letter-spacing: 0.2em;
+}
+.edit_panel .edit_container .edit_controller {
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  padding: 0.2em;
+}
+.edit_panel .edit_container .edit_controller button {
+  width: 30%;
+  margin-left: 0.2em;
+  padding: 0.2em 0.4em;
+  border: none;
+  outline: none;
+  background-color: var(--color-primary-red);
+  color: white;
+  border-radius: 3px;
+}
+.edit_panel .edit_container .edit_controller button:hover {
+  cursor: pointer;
+}
+.edit_panel .edit_container .edit_controller button:hover svg {
+  transform: scale(1.1);
+}
+.edit_panel .edit_container .edit_controller:hover {
+  color: var(--color-primary-red);
+}
+.edit_panel .edit_container .edit_controller small {
+  font-size: 0.4em;
+}
+.edit_panel .edit_container .edit_controller input {
+  width: 100%;
+}
+.edit_panel .edit_container .edit_controller input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: gray; /* Change to your desired color */
+  /* Customize thumb appearance */
+  border-radius: 50%;
+  background-color: blue; /* Change to your desired color */
+  width: 20px;
+  height: 20px;
+  /* Ensure thumb remains above the track */
+  transform: translateY(-5px);
 }
 
 @media (min-width: 100px) and (max-width: 319px) {

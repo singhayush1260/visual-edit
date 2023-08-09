@@ -15,6 +15,7 @@
   border-bottom-right-radius: 7px;
   position: fixed;
   left: 0;
+  transition: width 0.2s ease;
 }
 .sidebar .close,
 .sidebar .open {
@@ -27,6 +28,10 @@
 }
 .sidebar .logo {
   height: 20%;
+  margin-left: 5px;
+}
+.sidebar .logo h2 {
+  transform: all 0.3s ease;
 }
 .sidebar .menus,
 .sidebar .account {
@@ -131,54 +136,25 @@
   display: none;
 }
 
-@media (min-width: 100px) and (max-width: 319px) {
-  .mobile_view {
-    width: 100%;
-    align-items: center;
-  }
-}
 @media (min-width: 320px) and (max-width: 486px) {
-  .sidebar.mobile_view {
-    width: 100%;
-    align-items: center;
-    font-size: 26px;
-  }
-  .sidebar.mobile_view .logo {
-    display: flex;
-    gap: 3em;
-    padding: 1em;
-  }
-  .sidebar.mobile_view .logo svg {
-    font-size: 1.8em;
-  }
-  .sidebar.mobile_view .menus, .sidebar.mobile_view .account {
-    width: 100%;
-  }
-  .sidebar.mobile_view.contracted_sidebar {
+  .sidebar {
     display: none;
   }
 }
 @media (min-width: 487px) and (max-width: 786px) {
-  .sidebar.mobile_view {
-    width: 50%;
-    align-items: center;
-    font-size: 26px;
-  }
-  .sidebar.mobile_view .logo {
-    display: flex;
-    gap: 3em;
-    padding: 1em;
-  }
-  .sidebar.mobile_view .logo svg {
-    font-size: 1.8em;
-  }
-  .sidebar.mobile_view .menus, .sidebar.mobile_view .account {
-    width: 100%;
-  }
-  .sidebar.mobile_view.contracted_sidebar {
+  .sidebar {
     display: none;
   }
 }
-.hide_sidebar {
-  display: none;
+@media (min-width: 787px) and (max-width: 1000px) {
+  .expanded_sidebar {
+    width: 17%;
+  }
+  .contracted_sidebar {
+    width: 15%;
+    font-size: 24px;
+  }
+  .contracted_sidebar .logo {
+    padding: 1em;
+  }
 }/*# sourceMappingURL=Sidebar.module.css.map */

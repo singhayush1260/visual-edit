@@ -11,15 +11,18 @@
   background-image: url("../../assets/images/stacked-waves.svg");
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 }
 
 @media (min-width: 320px) and (max-width: 486px) {
   .page_wrapper {
     height: 100vh;
+    padding: 0 10px;
   }
 }
 @media (min-width: 487px) and (max-width: 786px) {
   .page_wrapper {
     height: 100vh;
+    padding: 0 10px;
   }
 }/*# sourceMappingURL=PageWrapper.module.css.map */
