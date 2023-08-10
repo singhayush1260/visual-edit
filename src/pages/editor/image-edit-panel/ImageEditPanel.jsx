@@ -11,7 +11,6 @@ const ImageEditPanel = () => {
     <motion.div className={classes.edit_panel} initial={{ x: "700px" }} animate={{ x: "-5px" }}
       exit={{ x: 0 }} transition={{ duration: 1.1 }} >
       <EditorActionButtons/>
-      <ZoomLevel />
       <CropResizeRotate />
       <Adjustment />
     </motion.div>
