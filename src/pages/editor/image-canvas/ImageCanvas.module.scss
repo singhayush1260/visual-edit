@@ -11,11 +11,12 @@
     justify-content: center;
     background-color: #1B6B93;
     overflow: auto;
+    position: relative;
     .container_center
     {
-     width: 55%;
+     width: 70%;
      min-height: 50%;
-     height: 60%;
+     height: 65%;
      background-color: white;
      border-radius: 5px;
      display: flex;
@@ -59,6 +60,15 @@
         }
      }
     }
+    .preview_canvas{
+        position: absolute;
+        background-color: white;
+        width: 30%;
+        height: 30%;
+        top:0;
+        right: 0;
+        z-index:99;
+     }
 }
 @media (min-width: 100px) and (max-width: 319px) {
     .image_canvas{

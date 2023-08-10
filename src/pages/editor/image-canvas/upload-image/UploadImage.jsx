@@ -22,8 +22,9 @@ const ImageUpload = () => {
       console.error('Error uploading image:', error);
     }
   
-    const serializedImage=URL.createObjectURL(image)
-    dispatch({type:'upload', payload:serializedImage})
+    const serializedImage=URL.createObjectURL(image);
+    dispatch({type:'upload', payload:serializedImage});
+    dispatch({type:'setCroppedImage', payload:serializedImage});
   };
 
   return (

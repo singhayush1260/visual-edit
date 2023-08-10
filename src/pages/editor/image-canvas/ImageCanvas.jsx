@@ -26,13 +26,14 @@ const ImageCanvas = () => {
       animate={{ x: "-5px" }}
       exit={{ x: 0 }}
       transition={{ duration: 1.1 }}
-    >
-      <div className={classes.container_center} style={{ transform: `scale(${zoomLevel})` }}
-        onWheel={(e) => selectedImage && handleScrollZoom(e)} >
+    >  
+      <div className={classes.container_center} 
+         >
         <ImageUpload />
         <ImageDisplayArea />
       </div>
-    </motion.div>
+          
+      </motion.div>
   );
 };
 export default ImageCanvas;

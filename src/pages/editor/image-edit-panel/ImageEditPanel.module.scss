@@ -21,11 +21,15 @@
         height: 12%;
         display: flex;
         justify-content: space-around;
+        gap:0.2em;
         margin-bottom: 0.5em;
         button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 10px;
             height: 50%;
-            width: 28%;
+            width: 20%;
             border: 0;
             background-color: var(--color-primary-red);
             letter-spacing: 1.5px;
