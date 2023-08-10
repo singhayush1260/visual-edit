@@ -15,8 +15,8 @@ const ImageDisplayArea = () => {
   const[tempCroppedImage, setTempCroppedImage]=useState(null);
   const[zoomLevel, setZoomLevel]=useState(1);
   const { selectedImage, croppedImage } = useSelector((state) => state.imageUploadReducer);
-  const { showPreview }=useSelector((state) => state.transformationReducer)
-  const { isButtonClicked:{ cropButton, resizeButton, rotateButton } }=useSelector((state) => state.transformationReducer)
+  const { showPreview, rotation:degree, isButtonClicked:{ cropButton, resizeButton, rotateButton } }=useSelector((state) => state.transformationReducer)
+
 
   const canvasRef=useRef(null);
   const imageRef=useRef(null);
@@ -55,7 +55,6 @@ const ImageDisplayArea = () => {
       setZoomLevel( zoomLevel-0.1 < MIN_ZOOM_LEVEL ? MIN_ZOOM_LEVEL : zoomLevel-0.1);
     }
   };
-
   return (
     <>
       {selectedImage && (
@@ -68,7 +67,9 @@ const ImageDisplayArea = () => {
           style={{width:'100%', height:'100%'}}
           disabled={false} >
             {/* <Image src={selectedImage} /> */}
-            <img src={croppedImage || selectedImage } ref={imageRef}  alt="image" style={{transform: `scale(${zoomLevel})` }} onWheel={(e) => selectedImage && handleScrollZoom(e)} />
+            <div style={{transform: `scale(${zoomLevel})` }}>
+            <img src={croppedImage || selectedImage } ref={imageRef}  alt="image" style={{transform: `rotate(${degree}deg)` }} onWheel={(e) => selectedImage && handleScrollZoom(e)} />
+            </div>
         </ReactCrop>
       )}
       { showPreview && <PreviewCanvas pcRef={canvasRef}/>}
