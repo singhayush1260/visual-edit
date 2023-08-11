@@ -6,7 +6,7 @@
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
     display: flex;
     gap:1em;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     background-color: #1B6B93;
@@ -14,9 +14,9 @@
     position: relative;
     .container_center
     {
-     width: 70%;
+     width: 85%;
      min-height: 50%;
-     height: 65%;
+     height: 85%;
      background-color: white;
      border-radius: 5px;
      display: flex;
