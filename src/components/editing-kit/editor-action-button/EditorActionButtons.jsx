@@ -1,5 +1,6 @@
 import classes from "../../../pages/editor/image-edit-panel/ImageEditPanel.module.scss";
 import { FcUpload, FcFile, FcDownload, FcUndo, FcRedo } from "react-icons/fc";
+import {BiChevronDown} from 'react-icons/bi';
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,23 +29,20 @@ const EditorActionButtons = () => {
   };
 
   return (
-    <div className={classes.button_div}>
-      <button title="New Image">
-        <FcUpload />
-      </button>
-      <button title="Save" onClick={handleSave}>
-        <FcFile />
-      </button>
-      <button title="Download" onClick={handleDownload}>
-        <FcDownload />
+    <div className={classes.editor_action_button_div}>
+        <button title="Save">
+        <span>Save</span>
       </button>
       <button title="Undo">
-        <FcUndo />
+        <span>Undo</span>
       </button>
       <button title="Redo">
-        <FcRedo />
+        <span>Redo</span>
       </button>
-   
+      <button title="Download" onClick={handleDownload}>
+        <span>Export</span>
+        <BiChevronDown/>
+      </button>
     </div>
   );
 };

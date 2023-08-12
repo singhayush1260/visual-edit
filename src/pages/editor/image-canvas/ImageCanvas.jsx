@@ -17,7 +17,7 @@ const ImageCanvas = () => {
       transition={{ duration: 1.1 }}
     > 
       <div className={classes.container_center}>
-        <ImageUpload />
+        
         <ImageDisplayArea />
       </div>
     </motion.div>

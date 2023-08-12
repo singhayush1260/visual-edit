@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import Adjustment from "../../../components/editing-kit/image-adjustement/Adjustement";
 import Transform from "../../../components/editing-kit/transform/Transform";
 import EditorActionButtons from "../../../components/editing-kit/editor-action-button/EditorActionButtons";
+import AddEmoji from "../../../components/editing-kit/emoji/AddEmoji";
+import AddFilter from "../../../components/editing-kit/filters/AddFilter";
 
 const ImageEditPanel = () => {
 
@@ -12,6 +14,8 @@ const ImageEditPanel = () => {
       <EditorActionButtons/>
       <Transform />
       <Adjustment />
+      <AddEmoji/>
+      <AddFilter/>
     </motion.div>
   );
 };

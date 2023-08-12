@@ -1,37 +1,12 @@
 .editor{
- 
     width: 100%;
     height: 100vh;
+    min-height: 100vh;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     gap:0.7em;
-    background-color: #ccc;
-    overflow: hidden;
-    .done{
-        background-color: #0e2954;
-        height: 100px;
-        width: 30px;
-        display: flex;
-        padding: 0.2em;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap:1.5em;
-        position: absolute;
-        right:320px;
-        top:43%;
-        z-index: 99999;
-       // border-radius: 99% 1% 31% 69% / 42% 100% 0% 58% ;
-       border-top-left-radius: 10px;
-       border-bottom-left-radius: 10px;
-        &.done>svg:nth-child(1),&.done>svg:nth-child(2){
-            &:hover{
-                transform: scale(1.4);
-                cursor: pointer;
-            }
-        }
-    }
+    background-color: var(--color-primary-dark);
 }
 @media (min-width: 100px) and (max-width: 319px) {
     .editor{

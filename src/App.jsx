@@ -13,7 +13,6 @@ const App = () => {
 
   return (
     <>
-   
       <AnimatePresence> 
       <Routes location={location} key={location.pathname}>
         <Route path="/login" element={ <Login/> }/>
