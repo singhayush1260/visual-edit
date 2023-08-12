@@ -7,6 +7,7 @@ import { transformationReducer } from "./reducers/transformationReducer";
 import { imageUploadReducer } from "./reducers/imageUploadReducer";
 import { undoRedoReducer } from './reducers/undoRedoReducer';
 import {editorActionsReducer} from './reducers/editorActionsReducer';
+import { themeReducer } from "./reducers/themeReducer";
 
 const editorStore = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ const editorStore = configureStore({
     transformationReducer,
     imageUploadReducer,
     undoRedoReducer,
-    editorActionsReducer
+    editorActionsReducer,
+    themeReducer
   },
 });
 

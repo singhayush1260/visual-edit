@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <PageWrapper>
       <div 
-      className={classes.container_div_center}
+      className={`dark_theme ${classes.container_div_center}`}
       >
         <div className={classes.heading_div}>
           <h2>Sign in to your account</h2>

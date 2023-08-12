@@ -3,8 +3,11 @@ import { useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import EmojiPicker from 'emoji-picker-react';
 import { EmojiStyle} from 'emoji-picker-react';
+import { useSelector } from "react-redux";
+
 const AddEmoji = () => {
   const [expand, setExpand] = useState(false);
+  const { isDarkTheme } = useSelector((state) => state.themeReducer);
   return (
     <div className={classes.edit_container}>
       <div
@@ -15,7 +18,7 @@ const AddEmoji = () => {
         {expand && <BiChevronUp />}
       </div>
      { expand && <div className={classes.expanded_edit_container}>
-         <EmojiPicker width="100%" height={280} theme="dark" emojiStyle={EmojiStyle.GOOGLE}  previewConfig={false}/>
+         <EmojiPicker width="100%" height={280} theme={`${isDarkTheme ? 'dark' : 'light'}`} emojiStyle={EmojiStyle.GOOGLE}  previewConfig={false}/>
       </div>}
     </div>
   );
