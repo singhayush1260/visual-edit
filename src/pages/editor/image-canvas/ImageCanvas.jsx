@@ -1,7 +1,6 @@
 import classes from "./ImageCanvas.module.scss";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import ImageUpload from "./upload-image/UploadImage";
 import ImageDisplayArea from "./image-display-area/ImageDisplayArea";
 
 const ImageCanvas = () => {
@@ -17,7 +16,6 @@ const ImageCanvas = () => {
       transition={{ duration: 1.1 }}
     > 
       <div className={classes.container_center}>
-        
         <ImageDisplayArea />
       </div>
     </motion.div>

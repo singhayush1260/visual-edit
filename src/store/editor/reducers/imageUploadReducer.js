@@ -1,15 +1,23 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-  selectedImage:"",
-  croppedImage:"",
+  showImageUploadDialog: false,
+  originalImage:null,
+  croppedImage: null,
+  imageLink: null,
 };
 
 export const imageUploadReducer = createReducer(initialState, {
-  upload: (state, action) => {
-    state.selectedImage = action.payload;
+  showDialog: (state) => {
+    state.showImageUploadDialog = true;
   },
-  setCroppedImage:(state, action)=>{
+  hideDialog: (state) => {
+    state.showImageUploadDialog = false;
+  },
+  setOriginalImage: (state, action) => {
+    state.originalImage = action.payload;
+  },
+  setCroppedImage: (state, action) => {
     state.croppedImage = action.payload;
-  }
+  },
 });

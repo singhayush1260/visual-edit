@@ -7,9 +7,8 @@ import { PiTextTBold } from 'react-icons/pi';
 import { useSelector, useDispatch } from "react-redux";
 import useImageUpload from '../../../hooks/useImageUpload';
 
-const Toolbar = () => {
 
- // const [isDarkMode, setIsDarkMode] = useState(false);
+const Toolbar = () => {
 
   const { selectedImage } = useSelector((state) => state.imageUploadReducer);
 
@@ -17,12 +16,13 @@ const Toolbar = () => {
 
   const dispatch=useDispatch();
 
-  const { handleImageUpload } = useImageUpload();
-
   const handleInputChange = (e) => {
 
-    const API_ENDPOINT = 'http://localhost:4000/api/file/upload';
-    handleImageUpload(e, API_ENDPOINT);
+    // const API_ENDPOINT = 'http://localhost:4000/api/file/upload';
+    // handleImageUpload(e, API_ENDPOINT);
+  }
+  const showImageUploadDialog=()=>{
+    dispatch({type:'showDialog'});
   }
   
   const removeImage=()=>{
@@ -33,10 +33,7 @@ const Toolbar = () => {
   return (
     <div className={`${isDarkTheme ? 'dark_theme' : 'light_theme'} ${classes.toolbar}`}>
       <div className={classes.tools}>
-        {!selectedImage && <div title='Add Image'>
-          <label htmlFor="image"><FcAddImage htmlFor="image" /> </label>
-          <input type="file" id='image' onChange={(e) => handleInputChange(e)} />
-        </div>}
+        <div title='Add Image' onClick={showImageUploadDialog}><FcAddImage htmlFor="image" /></div>
         {selectedImage && <div title='Remove Image' onClick={removeImage}> <FcRemoveImage /></div>}
         <div title='Crop'><BsCrop /></div>
         <div title='Resize'><TbResize /></div>
