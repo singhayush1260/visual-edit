@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from './DialogBox.module.scss';
 import DraggableContainer from '../dragable-container/DraggableContainer';
-import { AiOutlineCloseCircle, AiOutlineUpload } from 'react-icons/ai';
+import { AiOutlineUpload, AiOutlineClose } from 'react-icons/ai';
 import { FcAddImage } from 'react-icons/fc';
 import { useDispatch } from 'react-redux';
 import useImageUpload from '../../hooks/useImageUpload';
@@ -40,7 +40,7 @@ const DialogBox = () => {
     return (
         <DraggableContainer>
             <div className={classes.dialog_box}>
-                <AiOutlineCloseCircle onClick={() => dispatch({ type: 'hideDialog' })} />
+                <AiOutlineClose onClick={() => dispatch({ type: 'hideDialog' })} />
                 <div className={classes.upload}>
                     <label htmlFor="upload_image">
                         <FcAddImage />

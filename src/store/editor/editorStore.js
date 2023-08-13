@@ -8,9 +8,11 @@ import { imageUploadReducer } from "./reducers/imageUploadReducer";
 import { undoRedoReducer } from './reducers/undoRedoReducer';
 import {editorActionsReducer} from './reducers/editorActionsReducer';
 import { themeReducer } from "./reducers/themeReducer";
+import { stateReducer } from "./reducers/stateReducer";
 
 const editorStore = configureStore({
   reducer: {
+    stateReducer,
     imageAdjustmentsReducer,
     drawingReducer,
     filtersReducer,
@@ -19,7 +21,8 @@ const editorStore = configureStore({
     imageUploadReducer,
     undoRedoReducer,
     editorActionsReducer,
-    themeReducer
+    themeReducer,
+
   },
 });
 

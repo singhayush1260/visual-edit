@@ -11,7 +11,7 @@ import { useState } from "react";
 const Transform = () => {
 
   const [showExpanded, setShowExpanded] = useState({ showCropButton:false, showResizeButton: false, showRotationSlider: false });
-  const { showPreview } = useSelector((state) => state.transformationReducer);
+  const { cropData, showPreview } = useSelector((state) => state.transformationReducer);
   const[expand, setExpand]=useState(false);
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const Transform = () => {
        </div>
        <div className={classes.expanded_edit_container}>
        { expand && <div className={classes.edit_controller}>
-          <Crop/>
+          <Crop cropData={cropData}/>
           <Resize/>
           <RotateSlider/>
         </div>}

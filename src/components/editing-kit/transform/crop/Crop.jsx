@@ -2,19 +2,21 @@ import { useState } from "react";
 import classes from "../../../../pages/editor/image-edit-panel/ImageEditPanel.module.scss";
 import { useDispatch } from "react-redux";
 
-const Crop = () => {
+const Crop = ({cropData}) => {
 
   const[isCropping, setIsCropping]=useState(false);  
+  
+  const {width, height, x, y}=cropData;
 
   return (
     <div className={classes.expanded_edit_container__crop}>
        { !isCropping && <small onClick={()=>setIsCropping(!isCropping)}>Crop</small>}
-       { isCropping && <small  onClick={()=>setIsCropping(!isCropping)}>Cropping.....</small>}
+       { isCropping && <small  onClick={()=>setIsCropping(!isCropping)}>Cropping</small>}
       { isCropping && <div>
-            <small>X: 0</small>
-            <small>Y: 0</small>
-            <small>W: 0</small>
-            <small>H: 0</small>
+            <small>X: {parseInt(x)} </small>
+            <small>Y: {parseInt(y)}</small>
+            <small>W: {parseInt(width)}</small>
+            <small>H: {parseInt(height)}</small>
         </div>}
     </div>
   );

@@ -15,7 +15,6 @@ const ImageEditPanel = () => {
     <motion.div className={`${isDarkTheme ? 'dark_theme' : 'light_theme'} ${classes.edit_panel}`} initial={{ x: "700px" }} animate={{ x: "-5px" }}
       exit={{ x: 0 }} transition={{ duration: 1.1 }} >
       <EditorActionButtons/>
-      <Transform />
       <Adjustment />
       <AddEmoji/>
       <AddFilter/>

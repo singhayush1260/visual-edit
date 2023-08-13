@@ -4,13 +4,15 @@
     border: 1px solid #ccc;
     user-select: none;
     transition: box-shadow 0.2s ease;
-    cursor: grab;
     min-width: 250px;
     min-height: 200px;
     height: auto;
     width: auto;
     z-index: 99999;
     border-radius: 5px;
+    svg{
+      cursor: grab;
+    }
   }
   
   .draggable_dialog.dragging {
