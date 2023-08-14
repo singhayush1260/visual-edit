@@ -30,6 +30,12 @@
     justify-content: center;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    &.currently_active{
+     border: 1px solid var(--color-button-primary);
+     svg{
+      color: var(--color-button-primary);
+     }
+    }
     input{
       display: none;
       cursor: pointer;

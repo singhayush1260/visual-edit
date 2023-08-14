@@ -5,6 +5,7 @@ const useImageUpload = () => {
   const dispatch = useDispatch();
 
   const imageUploadHandler = async (image, endpoint, link) => {
+    dispatch({ type: "rotate", payload: 0 });
     if (image) {
       const formData = new FormData();
       formData.append("image", image);
@@ -24,7 +25,7 @@ const useImageUpload = () => {
         return false;
       }
     } else if (link) {
-      dispatch({ type: "setOriginalImage", payload: link });
+        dispatch({ type: "setOriginalImage", payload: link });
         dispatch({ type: "setCroppedImage", payload: link });
       return true;
     } else {

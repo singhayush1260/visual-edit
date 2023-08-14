@@ -1,11 +1,17 @@
 import classes from './DraggableContainer.module.scss';
 import { useState, useEffect } from "react";
 import { RiDraggable } from 'react-icons/ri';
+import {MdClose} from 'react-icons/md';
+import { useSelector, useDispatch } from "react-redux";
 
-const DraggableContainer = ({ children }) => {
+const DraggableContainer = ({ children, x, y }) => {
+
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 300, y: 110 });
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [offset, setOffset] = useState({ x: 0, y: 0 }); 
+
+  const { showDraggableDialogBox } = useSelector((state) => state.stateReducer);
+  const dispatch=useDispatch();
 
   useEffect(() => {
     if (isDragging) {
@@ -34,13 +40,21 @@ const DraggableContainer = ({ children }) => {
   };
 
   return (
-    <div
-      className={`${classes.draggable_dialog} ${isDragging ? classes.dragging : ""}`}
-      style={{ top: position.y, left: position.x }}
-    >
-      <RiDraggable title='Drag' onMouseDown={handleMouseDown} />
-      {children}
-    </div>
+   <>
+   {
+     <div
+     className={`${classes.draggable_dialog} ${isDragging ? classes.dragging : ""}`}
+     style={{ top: position.y, left: position.x }}
+   >
+     <div className={classes.top}>
+     <RiDraggable title='Drag' onMouseDown={handleMouseDown} />
+     <MdClose onClick={()=>dispatch({ type: "toggleDraggableDialogBoxVisibility"})}/>
+     </div>
+
+     {children}
+   </div>
+   }
+   </>
   );
 };
 

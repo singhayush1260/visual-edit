@@ -4,14 +4,24 @@
     border: 1px solid #ccc;
     user-select: none;
     transition: box-shadow 0.2s ease;
-    min-width: 250px;
-    min-height: 200px;
+    min-width: 100px;
+    min-height: 100px;
     height: auto;
     width: auto;
     z-index: 99999;
     border-radius: 5px;
-    svg{
-      cursor: grab;
+    .top{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0.1em;
+      border-bottom: 0.3px solid rgba($color: #000000, $alpha: 0.1);
+      &.top>svg:nth-child(1){
+        cursor: grab;
+      }
+      &.top>svg:nth-child(2){
+        cursor: pointer;
+      }
     }
   }
   

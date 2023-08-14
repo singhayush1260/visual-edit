@@ -4,13 +4,15 @@ import ImageCanvas from './image-canvas/ImageCanvas';
 import ImageEditPanel from './image-edit-panel/ImageEditPanel';
 import Toolbar from './toolbar/Toolbar';
 import { useSelector } from "react-redux";
-
+import RotateSlider from '../../components/editing-kit/transform/rotate-slider/RotateSlider';
 const Editor = () => {
     const { isDarkTheme } = useSelector((state) => state.themeReducer);
-    const { showImageUploadDialog } = useSelector((state) => state.imageUploadReducer)
+    const { showImageUploadDialog } = useSelector((state) => state.imageUploadReducer);
+    const { showRotationSlider } = useSelector((state) => state.stateReducer);
     return (
         <div className={`${isDarkTheme ? 'dark_theme' : 'light_theme'} ${classes.editor}`}>
-            {showImageUploadDialog && <DialogBox />}
+            { showImageUploadDialog && <DialogBox /> }
+            { showRotationSlider && <RotateSlider/> }
             <Toolbar />
             <ImageCanvas />
             <ImageEditPanel />

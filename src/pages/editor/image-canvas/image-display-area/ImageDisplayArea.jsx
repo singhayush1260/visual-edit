@@ -2,11 +2,11 @@ import classes from '../ImageCanvas.module.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useRef } from "react";
 import ReactCrop from "react-image-crop";
+import { Resizable } from 're-resizable';
 import { previewCrop } from "../../../../utils/previewCrop";
 import "react-image-crop/dist/ReactCrop.css";
-import axios from "axios";
 import PreviewCanvas from "../preview-canvas/PreviewCanvas";
-import { useEffect } from "react";
+
 
 const ImageDisplayArea = () => {
   const [crop, setCrop] = useState({ aspect: 16 / 9 });
@@ -15,7 +15,7 @@ const ImageDisplayArea = () => {
   const { originalImage, croppedImage } = useSelector(
     (state) => state.imageUploadReducer
   );
-  const { isCropping } = useSelector( (state) => state.stateReducer);
+  const { isZooming, isCropping, isResizing } = useSelector( (state) => state.stateReducer);
   const {
     showPreview,
     rotation: degree,
@@ -25,14 +25,6 @@ const ImageDisplayArea = () => {
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch({ type: "setCroppedImage", payload: tempCroppedImage });
-  //   dispatch({
-  //     type: "transform",
-  //     payload: { buttonType: "crop", value: false },
-  //   });
-  // }, [cropButton, resizeButton, rotateButton]);
 
   const handleCrop = async (newCrop) => {
     setCrop(newCrop);
@@ -46,6 +38,7 @@ const ImageDisplayArea = () => {
   };
 
   const cropImage=()=>{
+    console.log('tempCroppedImage',tempCroppedImage);
     dispatch({ type: "setCroppedImage", payload: tempCroppedImage });
     dispatch({ type: "disableCropping"});
   }
@@ -66,6 +59,7 @@ const ImageDisplayArea = () => {
   return (
     <>
       {isCropping && <button className={classes.done} onClick={cropImage}>Done</button>}
+      <div className={classes.zoom_area} style={{ transform: `scale(${zoomLevel})`, cursor:`${isZooming ? 'zoom-in' :'default'}`}} onWheel={(e) => originalImage && isZooming && handleScrollZoom(e)}  >
       {originalImage && isCropping && (
         <ReactCrop
           crop={crop}
@@ -75,28 +69,40 @@ const ImageDisplayArea = () => {
           onComplete={cropReleased}
           style={{ width: "100%", height: "100%" }}
         >
-          <div style={{ transform: `scale(${zoomLevel})` }}>
             <img
               src={croppedImage || originalImage}
               ref={imageRef}
               alt="image"
               style={{ transform: `rotate(${degree}deg)` }}
-              onWheel={(e) => originalImage && handleScrollZoom(e)}
             />
-          </div>
         </ReactCrop>
       )}
-      {
-       originalImage && !isCropping && <div style={{ width:'100%',height:'100%', transform: `scale(${zoomLevel})` }}>
-        <img
+      {originalImage && !isCropping && isResizing && (
+        <div style={{ width: '100%', height: '100%' }}>
+          <Resizable
+            defaultSize={{ width: '100%', height: '100%' }}
+            onResizeStop={(e, direction, ref, d) => console.log(d)}
+          >
+            <img
+             ref={imageRef}
+              src={croppedImage || originalImage}
+              alt="image"
+              style={{ transform: `rotate(${degree}deg)` }}
+            />
+          </Resizable>
+        </div>
+      )}
+         {
+       originalImage && !isCropping && !isResizing && <div style={{ width:'100%',height:'100%'}}>
+       <img
+        ref={imageRef}
           src={croppedImage || originalImage}
-          ref={imageRef}
           alt="image"
           style={{ transform: `rotate(${degree}deg)` }}
-          onWheel={(e) => originalImage && handleScrollZoom(e)}
         />
       </div>
       }
+      </div>
       {showPreview && <PreviewCanvas pcRef={canvasRef} />}
     </>
   );

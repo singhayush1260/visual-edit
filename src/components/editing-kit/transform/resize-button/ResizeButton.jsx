@@ -1,8 +1,8 @@
-import classes from "./RotateSlider.module.scss";
+import classes from './ResizeButton.module.scss';
 import { useDispatch } from "react-redux";
-import CircularSlider from "@fseehawer/react-circular-slider";
 import DraggableContainer from "../../../dragable-container/DraggableContainer";
-const RotateSlider = () => {
+
+const ResizeButton = () => {
   const dispatch = useDispatch();
 
   const handleRotate = (degree) => {
@@ -28,4 +28,4 @@ const RotateSlider = () => {
     </DraggableContainer>
   );
 };
-export default RotateSlider;
+export default ResizeButton;

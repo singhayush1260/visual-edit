@@ -1,6 +1,11 @@
 const TO_RADIANS = Math.PI / 180;
 
 export const previewCrop = (image, canvas, crop, scale = 1, rotate = 0) => {
+
+  console.log('image',image);
+  console.log('canvas',canvas);
+  console.log('crop',crop);
+
   const ctx = canvas.getContext("2d");
 
   if (!ctx) {

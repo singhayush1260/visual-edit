@@ -18,6 +18,10 @@
   font-family: gotham;
   border-radius: 5px;
   color: var(--color-text);
+  label{
+    color: var(--color-button-primary);
+    cursor: pointer;
+  }
   svg {
     position: absolute;
     top: 2px;

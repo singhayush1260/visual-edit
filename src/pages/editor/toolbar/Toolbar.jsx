@@ -5,13 +5,13 @@ import { AiOutlineRotateRight, AiOutlineZoomIn } from 'react-icons/ai';
 import { FcAddImage, FcRemoveImage } from 'react-icons/fc';
 import { BsCrop, BsPencil, BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs';
 import { PiTextTBold } from 'react-icons/pi';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import useImageUpload from '../../../hooks/useImageUpload';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 const Toolbar = () => {
   const { selectedImage } = useSelector((state) => state.imageUploadReducer);
   const { isDarkTheme } = useSelector((state) => state.themeReducer);
+  const { isZooming, isCropping, showRotationSlider, isResizing } = useSelector( (state) => state.stateReducer);
 
   const dispatch = useDispatch();
 
@@ -24,16 +24,17 @@ const Toolbar = () => {
         removeImage();
         break;
       case 'crop':
-        dispatch({ type: "enableCropping"});
+        dispatch({type:'setEditingState',payload:'crop'})
         break;
       case 'resize':
-        // Dispatch the action for resize tool
+        dispatch({type:'setEditingState',payload:'resize'})
         break;
       case 'rotate':
-        // Dispatch the action for rotate tool
+        dispatch({ type: "toggleDraggableDialogBoxVisibility"});
+        dispatch({type:'setEditingState',payload:'rotate'})
         break;
       case 'zoom':
-        // Dispatch the action for zoom tool
+        dispatch({type:'setEditingState',payload:'zoom'})
         break;
       case 'pencil':
         // Dispatch the action for pencil tool
@@ -58,24 +59,24 @@ const Toolbar = () => {
   return (
     <div className={`${isDarkTheme ? 'dark_theme' : 'light_theme'} ${classes.toolbar}`}>
       <div className={classes.tools}>
-        <div title='Add Image' onClick={() => handleToolClick('addImage')}>
+        <div   title='Add Image' onClick={() => handleToolClick('addImage')}>
           <FcAddImage />
         </div>
         {selectedImage && (
-          <div title='Remove Image' onClick={() => handleToolClick('removeImage')}>
+          <div  title='Remove Image' onClick={() => handleToolClick('removeImage')}>
             <FcRemoveImage />
           </div>
         )}
-        <div title='Crop' onClick={() => handleToolClick('crop')}>
+        <div className={`${isCropping && classes.currently_active}`} title='Crop' onClick={() => handleToolClick('crop')}>
           <BsCrop />
         </div>
-        <div title='Resize' onClick={() => handleToolClick('resize')}>
+        <div className={`${isResizing && classes.currently_active}`} title='Resize' onClick={() => handleToolClick('resize')}>
           <TbResize />
         </div>
-        <div title='Rotate' onClick={() => handleToolClick('rotate')}>
+        <div className={`${showRotationSlider && classes.currently_active}`} title='Rotate' onClick={() => handleToolClick('rotate')}>
           <AiOutlineRotateRight />
         </div>
-        <div title='Zoom' onClick={() => handleToolClick('zoom')}>
+        <div className={`${isZooming && classes.currently_active}`} title='Zoom' onClick={() => handleToolClick('zoom')}>
           <AiOutlineZoomIn />
         </div>
         <div title='Pencil' onClick={() => handleToolClick('pencil')}>

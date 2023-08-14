@@ -5,14 +5,16 @@
   min-height: 100vh;
   width: 24%;
   background-color: var(--color-primary);
+  // border-top-left-radius: 7px;
+  // border-bottom-left-radius: 7px;
   color: var(--color-text);
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   gap: 0.7em;
   overflow: auto;
-  padding: 2em 0 1em 0;
+  padding-bottom: 1em;
   border-left: 0.1px solid var(--border-color);
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -30,6 +32,7 @@
       padding: 0.6em 0;
       border-radius: 4px;
       background-color: var(--color-button-primary);
+      //color:var(--color-button-text);
       color: white;
       font-size: 0.5em;
       font-family: gotham;
@@ -39,7 +42,7 @@
       justify-content: center;
       cursor: pointer;
     }
-    button:nth-child(4) {
+    &.editor_action_button_div > button:nth-child(4) {
       width: 30%;
       padding-left: 0.7em;
       padding-right: 0.3em;
@@ -53,6 +56,8 @@
   }
   .edit_container {
     width: 90%;
+    height: 10%;
+    height: auto;
     background-color: var(--color-secondary);
     padding: 0.4em 0.5em;
     border-radius: 5px;
@@ -78,22 +83,80 @@
     }
     .expanded_edit_container {
       width: 100%;
+      height: 10%;
       font-size: 0.6em;
-      .expanded_edit_container__crop,
-      .expanded_edit_container__resize,
-      .expanded_edit_container__rotate {
+      .expanded_edit_container__crop {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0.4em;
+        small {
+          cursor: pointer;
+        }
+        div {
+          small {
+            margin: 0 0.5em;
+            font-size: 0.8em;
+          }
+        }
+      }
+      .expanded_edit_container__resize {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-top: 0.9em;
         small {
           cursor: pointer;
+          font-size: 0.8em;
+        }
+        div {
+          width: 70%;
+          display: flex;
+          align-items: center;
+          small {
+            margin: 0 0.5em;
+          }
+          .group_buttons {
+            display: flex;
+            justify-content: space-evenly;
+            background-color: var(--color-primary);
+            div {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+            }
+            input {
+              width: 40px;
+              border: none;
+              outline: none;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: var(--color-primary);
+              padding: 0.2em;
+              text-align: center;
+              &::-webkit-outer-spin-button,
+              &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+              }
+            }
+          }
         }
       }
       .expanded_edit_container__rotate {
+        width: 100%;
+        margin-top: 0.9em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         padding-right: 2em;
+        background-color: aquamarine;
+        small {
+          cursor: pointer;
+        }
       }
-      .expanded_edit_container__adjustment {
+      .expanded_edit_container__adjustement {
         padding: 0.3em 0;
         .slider_wrapper {
           display: flex;
@@ -101,7 +164,6 @@
           align-items: center;
           margin: 0.6em 0;
           padding: 0 0.5em;
-
           input {
             width: 70%;
           }
@@ -140,12 +202,15 @@
           &:focus {
             background-color: var(--color-primary);
           }
+
+          // Style the dropdown options
           option {
             background-color: var(--color-secondary);
             color: var(--color-text);
             font-weight: normal;
           }
         }
+
         .option {
           width: 100%;
           margin-top: 5px;
@@ -169,5 +234,21 @@
         }
       }
     }
+  }
+}
+
+@media (min-width: 100px) and (max-width: 319px) {
+  .edit_panel {
+    width: 100%;
+  }
+}
+@media (min-width: 320px) and (max-width: 486px) {
+  .edit_panel {
+    width: 100%;
+  }
+}
+@media (min-width: 487px) and (max-width: 786px) {
+  .edit_panel {
+    width: 100%;
   }
 }
