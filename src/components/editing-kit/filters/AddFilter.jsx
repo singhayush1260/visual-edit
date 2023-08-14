@@ -1,10 +1,17 @@
 import classes from "../../../pages/editor/image-edit-panel/ImageEditPanel.module.scss";
 import { useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import { useDispatch } from "react-redux";
 
 const AddFilter = () => {
   const [expand, setExpand] = useState(false);
-  const[selectedFilter, setSelectedFilter]=useState(null);
+  const dispatch=useDispatch();
+
+  const handleFilterSelection=(e)=>{
+    console.log(e.target.value)
+    const selectedFilter=e.target.value;
+    dispatch({type:'addFilter',payload:selectedFilter});
+  }
   return (
     <div className={classes.edit_container}>
       <div
@@ -16,18 +23,11 @@ const AddFilter = () => {
       </div>
      { expand && <div className={classes.expanded_edit_container}>
           <div className={classes.expanded_edit_container__filters}>
-            {/* <div className={classes.selected_filter}>
-              <small> {selectedFilter ? selectedFilter : "No filter selected"} </small>
-            </div> */}
-            <select>
+            <select onChange={handleFilterSelection}>
         <option value="none">No Filter</option>
         <option value="grayscale">Grayscale</option>
         <option value="sepia">Sepia</option>
         <option value="invert">Invert</option>
-        <option value="brightness">Brightness</option>
-        <option value="sepia">Sepia</option>
-        <option value="invert">Invert</option>
-        <option value="brightness">Brightness</option>
       </select>
             <button>Apply</button>
           </div>
@@ -36,27 +36,3 @@ const AddFilter = () => {
   );
 };
 export default AddFilter;
-/*
-   <select>
-        <option value="none">No Filter</option>
-        <option value="grayscale">Grayscale</option>
-        <option value="sepia">Sepia</option>
-        <option value="invert">Invert</option>
-        <option value="brightness">Brightness</option>
-        <option value="sepia">Sepia</option>
-        <option value="invert">Invert</option>
-        <option value="brightness">Brightness</option>
-      </select>
-
-       <div className={classes.option}>
-                  <div className={classes.select}>Sepia</div>
-                  <div className={classes.select}>Sepia</div>
-                  <div className={classes.select}>Sepia</div>       
-                  <div className={classes.select}>Sepia</div>
-                  <div className={classes.select}>Sepia</div>
-                  <div className={classes.select}>Sepia</div>
-                  <div className={classes.select}>Sepia</div>
-                  <div className={classes.select}>Sepia</div>
-              </div>
-
-*/

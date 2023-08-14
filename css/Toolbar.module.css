@@ -1,0 +1,77 @@
+.toolbar {
+  height: 100vh;
+  width: 4%;
+  min-height: 100%;
+  font-family: gotham;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--color-primary);
+  color: white;
+  border-right: 0.1px solid var(--border-color);
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.toolbar .tools {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+}
+.toolbar .tools div {
+  width: 70%;
+  height: 10%;
+  background-color: var(--color-secondary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.toolbar .tools div.currently_active {
+  border: 1px solid var(--color-button-primary);
+}
+.toolbar .tools div.currently_active svg {
+  color: var(--color-button-primary);
+}
+.toolbar .tools div input {
+  display: none;
+  cursor: pointer;
+}
+.toolbar .tools div svg {
+  font-size: 1em;
+  color: var(--color-text);
+}
+.toolbar .tools div:hover {
+  font-size: 0.9em;
+  cursor: pointer;
+}
+.toolbar .darkMode_button_container {
+  width: 70%;
+  height: 8%;
+  border-radius: 5px;
+  border-left: 0.1px solid var(--border-color);
+  background-color: var(--color-secondary);
+  color: white;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  cursor: pointer;
+}
+.toolbar .darkMode_button_container label {
+  cursor: pointer;
+}
+.toolbar .darkMode_button_container svg {
+  color: var(--color-text);
+}
+.toolbar .darkMode_button_container:hover {
+  cursor: pointer;
+  font-size: 1.2em;
+}/*# sourceMappingURL=Toolbar.module.css.map */

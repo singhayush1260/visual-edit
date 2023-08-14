@@ -1,15 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pacifico&display=swap");
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  --color-primary-light:#068FFF;
-  --color-primary-dark: #0079FF;
-  --color-primary-darker: #11009E;
-  --color-grey-light: #444444;
-  --color-hover-pink: #EA1179;
-  --color-sidebar:#0E2954;
-  --color-offwhite:#F5F5F5;
-  --color-primary-red: rgb(255, 56, 86);
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300&display=swap");
+body {
+  transition: background-color 0.3s ease;
+}
+body .dark_theme {
+  --color-primary: #161819;
+  --color-secondary:#1f2027;
+  --color-button-primary:#2F58CD;
+  --color-text:white;
+  --color-button-text:white;
+  --color-border: rgba(252, 250, 250, 0.1);
+  --color-button-seconday:#2F58CD;
+}
+body .light_theme {
+  --color-primary: #fafafa;
+  --color-secondary:	#d2d3db;
+  --color-button-primary:black;
+  --color-text:black;
+  --color-button-text:black;
+  --border-color: none;
+  --color-button-seconday:#d2d3db;
 }
 
 a {
@@ -22,17 +32,35 @@ a {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--color-primary-darker);
+  background: var(--color-button-primary);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary-dark);
-  border-radius: 12px;
+  background: var(--color-text);
+  border-radius: 4px;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-dark);
-  border-radius: 12px;
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type=range] {
+    overflow: hidden;
+    width: 80px;
+    -webkit-appearance: none;
+    border-radius: 5px;
+    background-color: var(--color-primary);
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    height: 10px;
+    -webkit-appearance: none;
+    color: #13bba4;
+    margin-top: -1px;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    width: 10px;
+    -webkit-appearance: none;
+    height: 10px;
+    cursor: ew-resize;
+    background: var(--color-button-primary);
+    box-shadow: -80px 0 0 80px var(--color-button-primary);
+  }
 }/*# sourceMappingURL=index.css.map */

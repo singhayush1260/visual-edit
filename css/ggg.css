@@ -1,0 +1,115 @@
+.edit_panel {
+  font-size: 24px;
+  font-family: gotham;
+  height: 100vh;
+  min-height: 100vh;
+  width: 24%;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7em;
+  overflow: auto;
+  padding-bottom: 1em;
+  border-left: 0.1px solid var(--border-color);
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.edit_panel .editor_action_button_div {
+  width: 90%;
+  height: 1.3em;
+  display: flex;
+  justify-content: space-around;
+  gap: 0.2em;
+  margin-bottom: 0.5em;
+}
+.edit_panel .editor_action_button_div button {
+  border: none;
+  outline: none;
+  width: 20%;
+  padding: 0.6em 0;
+  border-radius: 4px;
+  background-color: var(--color-button-primary);
+  color: white;
+  font-size: 0.5em;
+  font-family: gotham;
+  font-weight: 570;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.edit_panel .editor_action_button_div button:nth-child(4) {
+  width: 30%;
+  padding-left: 0.7em;
+  padding-right: 0.3em;
+  justify-content: space-between;
+}
+.edit_panel .editor_action_button_div button:nth-child(4):hover svg {
+  transform: scale(1.1);
+}
+.edit_panel .edit_container {
+  width: 90%;
+  background-color: var(--color-secondary);
+  padding: 0.4em 0.5em;
+  border-radius: 5px;
+  transition: height 0.4s ease;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.edit_panel .edit_container .edit_container__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.edit_panel .edit_container .edit_container__title small {
+  font-size: 0.5em;
+  letter-spacing: 0.2em;
+}
+.edit_panel .edit_container .edit_container__title svg {
+  transition: transform 0.4s ease;
+}
+.edit_panel .edit_container .edit_container__title:hover {
+  cursor: pointer;
+}
+.edit_panel .edit_container .edit_container__title:hover svg {
+  transform: translateY(2px);
+}
+.edit_panel .edit_container .expanded_edit_container {
+  width: 100%;
+  font-size: 0.6em;
+}
+.edit_panel .edit_container .expanded_edit_container .expanded_edit_container__crop,
+.edit_panel .edit_container .expanded_edit_container .expanded_edit_container__resize,
+.edit_panel .edit_container .expanded_edit_container .expanded_edit_container__rotate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.9em;
+}
+.edit_panel .edit_container .expanded_edit_container .expanded_edit_container__crop small,
+.edit_panel .edit_container .expanded_edit_container .expanded_edit_container__resize small,
+.edit_panel .edit_container .expanded_edit_container .expanded_edit_container__rotate small {
+  cursor: pointer;
+}
+.edit_panel .edit_container .expanded_edit_container .expanded_edit_container__filters {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.edit_panel .edit_container .expanded_edit_container .expanded_edit_container__filters button {
+  padding: 0.6em 3em;
+  margin-top: 0.2em;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+}
+@media (max-width: 786px) {
+  .edit_panel {
+    width: 100%;
+  }
+}/*# sourceMappingURL=ggg.css.map */

@@ -1,11 +1,12 @@
-// filtersReducer.js
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-  appliedFilters: [],
-  // ...other filter properties
+  noFilter: [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+  appliedFilters: "none",
 };
 
 export const filtersReducer = createReducer(initialState, {
-  // ...filter action cases
+  addFilter: (state, action) => {
+    state.appliedFilters = action.payload;
+  },
 });

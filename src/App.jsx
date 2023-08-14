@@ -5,7 +5,6 @@ import Footer from "./components/layouts/footer/Footer";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import Editor from "./pages/editor/Editor";
-import Sidebar from "./components/layouts/sidebar/Sidebar";
 import { AnimatePresence } from "framer-motion";
 const App = () => {
   const location=useLocation();
