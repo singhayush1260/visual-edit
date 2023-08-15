@@ -4,6 +4,7 @@ import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 
 const AddFilter = () => {
+
   const [expand, setExpand] = useState(false);
   const dispatch=useDispatch();
 
@@ -11,6 +12,11 @@ const AddFilter = () => {
     console.log(e.target.value)
     const selectedFilter=e.target.value;
     dispatch({type:'addFilter',payload:selectedFilter});
+  }
+
+  const showCustomFilterBox=()=>{
+    dispatch({type:'toggleCustomFilterDialogVisibility'});
+    dispatch({type:'addFilter',payload:"custom_filter"});
   }
   return (
     <div className={classes.edit_container}>
@@ -27,9 +33,17 @@ const AddFilter = () => {
         <option value="none">No Filter</option>
         <option value="grayscale">Grayscale</option>
         <option value="sepia">Sepia</option>
-        <option value="invert">Invert</option>
+        <option value="negative">Negative</option>
+        <option value="gamma">Gamma</option>
+        <option value="sharpen">Sharpen</option>
+        <option value="lark">Lark</option>
+        <option value="street">Street</option>
+        <option value="red_overlay">Red Overlay</option>
+        <option value="green_overlay">Green Overlay</option>
+        <option value="blue_overlay">Blue Overlay</option>
       </select>
-            <button>Apply</button>
+            {/* <button>Apply</button> */}
+            {/* <button onClick={showCustomFilterBox}>Custom Filter</button> */}
           </div>
       </div>}
     </div>

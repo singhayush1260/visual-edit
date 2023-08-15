@@ -8,11 +8,12 @@ import RotateSlider from '../../components/editing-kit/transform/rotate-slider/R
 const Editor = () => {
     const { isDarkTheme } = useSelector((state) => state.themeReducer);
     const { showImageUploadDialog } = useSelector((state) => state.imageUploadReducer);
-    const { showRotationSlider } = useSelector((state) => state.stateReducer);
+    const { showRotationSlider, showCustomFilterDialog } = useSelector((state) => state.stateReducer);
     return (
         <div className={`${isDarkTheme ? 'dark_theme' : 'light_theme'} ${classes.editor}`}>
             { showImageUploadDialog && <DialogBox /> }
             { showRotationSlider && <RotateSlider/> }
+            {/* { showCustomFilterDialog && <CustomFilter/>} */}
             <Toolbar />
             <ImageCanvas />
             <ImageEditPanel />

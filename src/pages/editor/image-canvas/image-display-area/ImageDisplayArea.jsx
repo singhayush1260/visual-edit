@@ -3,10 +3,11 @@ import classes from '../ImageCanvas.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { Resizable } from 're-resizable';
 import ReactCrop from 'react-image-crop';
-import ImageFilter from 'react-image-filter';
 import 'react-image-crop/dist/ReactCrop.css';
 import PreviewCanvas from '../preview-canvas/PreviewCanvas';
 import { previewCrop } from '../../../../utils/previewCrop';
+import SVG_Filters from '../../../../components/editing-kit/filters/SVG_Filters';
+
 
 const ImageDisplayArea = () => {
   const [crop, setCrop] = useState({ aspect: 16 / 9 });
@@ -18,9 +19,9 @@ const ImageDisplayArea = () => {
   const { isZooming, isCropping, isResizing } = useSelector((state) => state.stateReducer);
   const { showPreview, rotation: degree } = useSelector((state) => state.transformationReducer);
   const { brightness, contrast, hue, saturation } = useSelector((state) => state.imageAdjustmentsReducer);
-  const { noFilter, appliedFilters } = useSelector((state) => state.filtersReducer);
+  const { noFilter,customFilter, appliedFilter } = useSelector((state) => state.filtersReducer);
 
-  console.log(appliedFilters);
+  //console.log(appliedFilter);
 
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
@@ -115,14 +116,23 @@ const ImageDisplayArea = () => {
                 filter: adjustemnt,
               }}
             /> */}
-            <ImageFilter
-              image={croppedImage || originalImage}
-              filter={appliedFilters==='none' ? noFilter : appliedFilters}
-              style={{
-                transform: `rotate(${degree}deg)`,
-                filter: adjustemnt,
-              }}
-            />
+       
+            {console.log('custom filterx',customFilter)}
+             {/* <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+        <SharpenFilter />
+        <GammaFilter />
+        <SepiaFilter/>
+        <GrayscaleFilter/>
+        <InvertFilter/>
+        <NegativeFilter/>
+        <filter id="custom_filter">
+         <feColorMatrix
+          type="matrix"
+         values="1  1  1  1  1  1  2  1  1  1  1  1  1  1  1  1  1  1  1  1"/>
+</filter>
+      </svg> */}
+      <SVG_Filters/>
+      <img src={croppedImage || originalImage} alt="" style={{ filter: appliedFilter ? `url(#${appliedFilter})` : 'none' }} />
           </div>
         )}
 

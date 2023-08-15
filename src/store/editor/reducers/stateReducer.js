@@ -9,6 +9,7 @@ const initialState = {
   isDrawing:false,
   addText:false,
   isEditing: false,
+  showCustomFilterDialog:false,
   currentEditType: "", // keeps track of current edit type
 };
 
@@ -46,6 +47,9 @@ export const stateReducer = createReducer(initialState, {
   },
   disableZoom: (state) => {
     state.isZooming = false;
+  },
+  toggleCustomFilterDialogVisibility:(state)=>{
+    state.showCustomFilterDialog=!state.showCustomFilterDialog;
   },
   setCurrentEditType: (state, action) => {
     state.currentEditType =

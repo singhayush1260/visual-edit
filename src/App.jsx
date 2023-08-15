@@ -6,6 +6,7 @@ import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import Editor from "./pages/editor/Editor";
 import { AnimatePresence } from "framer-motion";
+import CF from './test/CF';
 const App = () => {
   const location=useLocation();
   const isAuthPage= location.pathname === '/login' || location.pathname === '/signup';
