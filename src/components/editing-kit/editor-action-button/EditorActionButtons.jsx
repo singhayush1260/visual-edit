@@ -7,12 +7,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 const EditorActionButtons = () => {
 
-  const { selectedImage, croppedImage } = useSelector( (state) => state.imageUploadReducer);
+  const { originalImage, croppedImage, tempRenderedImage, savedRenderedImage } = useSelector( (state) => state.imageUploadReducer);
   const { isButtonClicked: { saveButton } } = useSelector((state) => state.editorActionsReducer);
   const dispatch = useDispatch();
 
   const handleSave = () => {
-    dispatch({ type: "save", payload: true });
+    dispatch({ type: "saveImage"});
     toast.success("Image Saved");
   };
 
@@ -20,7 +20,7 @@ const EditorActionButtons = () => {
     if (croppedImage) {
       const link = document.createElement("a");
       console.log("saveButton", saveButton);
-      saveButton ? (link.href = croppedImage) : (link.href = selectedImage);
+      saveButton ? (link.href = savedRenderedImage) : (link.href = savedRenderedImage);
       link.target = "_blank";
       link.download = "downloaded_image.png";
       link.click();
@@ -30,7 +30,7 @@ const EditorActionButtons = () => {
 
   return (
     <div className={classes.editor_action_button_div}>
-        <button title="Save">
+        <button title="Save" onClick={handleSave}>
         <span>Save</span>
       </button>
       <button title="Undo">

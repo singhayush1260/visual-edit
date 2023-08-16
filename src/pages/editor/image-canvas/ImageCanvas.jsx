@@ -1,12 +1,13 @@
 import classes from "./ImageCanvas.module.scss";
 import { motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ImageDisplayArea from "./image-display-area/ImageDisplayArea";
+import ImageArea from "./image-display-area/ImageArea";
 import RealTimeCropData from '../../../components/real-time-crop-data/RealTimeCropData';
 
 const ImageCanvas = () => {
 
-  const { selectedImage } = useSelector((state) => state.imageUploadReducer);
+  const { tempRenderedImage,originalImage } = useSelector((state) => state.imageUploadReducer);
 
   return (
     <motion.div
@@ -17,8 +18,7 @@ const ImageCanvas = () => {
       transition={{ duration: 1.1 }}
     > 
       <div className={classes.container_center}>
-        <ImageDisplayArea />
-        
+        <ImageArea image={tempRenderedImage || originalImage}/>
       </div>
       <RealTimeCropData/>
     </motion.div>

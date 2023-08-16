@@ -5,6 +5,8 @@ const initialState = {
   originalImage:null,
   croppedImage: null,
   imageLink: null,
+  tempRenderedImage:null,
+  savedRenderedImage:null,
 };
 
 export const imageUploadReducer = createReducer(initialState, {
@@ -19,5 +21,13 @@ export const imageUploadReducer = createReducer(initialState, {
   },
   setCroppedImage: (state, action) => {
     state.croppedImage = action.payload;
+  },
+  setTempRenderedImage: (state, action) => {
+    console.log('inside setTempRenderedImage');
+    state.tempRenderedImage = action.payload;
+    console.log('state.tempRenderedImage',state.tempRenderedImage);
+  },
+  saveImage: (state) => {
+    state.savedRenderedImage = state.tempRenderedImage;
   },
 });

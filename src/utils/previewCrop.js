@@ -1,12 +1,22 @@
 const TO_RADIANS = Math.PI / 180;
 
-export const previewCrop = (image, canvas, crop, scale = 1, rotate = 0) => {
+export const previewCrop = (image, canvasRef, crop, scale = 1, rotate = 0) => {
 
   console.log('image',image);
-  console.log('canvas',canvas);
+  console.log('canvas',canvasRef);
   console.log('crop',crop);
-
+  let canvas;
+  if(canvasRef===null){
+   canvas=document.createElement('canvas');
+  }
+  else{
+    canvas=canvasRef;
+  }
+ 
   const ctx = canvas.getContext("2d");
+  
+
+  
 
   if (!ctx) {
     throw new Error("No 2d context");

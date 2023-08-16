@@ -10,18 +10,17 @@ import SVG_Filters from '../../../../components/editing-kit/filters/SVG_Filters'
 
 
 const ImageDisplayArea = () => {
-  const [crop, setCrop] = useState({ aspect: 16 / 9 });
+  const [crop, setCrop] = useState({ aspect: 1 / 1 });
   const [adjustemnt, setAdjustment] = useState("");
   const [tempCroppedImage, setTempCroppedImage] = useState(null);
   const [zoomLevel, setZoomLevel] = useState(1);
 
   const { originalImage, croppedImage } = useSelector((state) => state.imageUploadReducer);
-  const { isZooming, isCropping, isResizing } = useSelector((state) => state.stateReducer);
+  const { isZooming, isCropping, isResizing,  showRotationSlider } = useSelector((state) => state.stateReducer);
   const { showPreview, rotation: degree } = useSelector((state) => state.transformationReducer);
   const { brightness, contrast, hue, saturation } = useSelector((state) => state.imageAdjustmentsReducer);
   const { noFilter,customFilter, appliedFilter } = useSelector((state) => state.filtersReducer);
 
-  //console.log(appliedFilter);
 
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
@@ -30,7 +29,7 @@ const ImageDisplayArea = () => {
   const handleCrop = async (newCrop) => {
     setCrop(newCrop);
     dispatch({ type: 'crop', payload: newCrop });
-    const ci = previewCrop(imageRef.current, canvasRef.current, newCrop); // Use the new crop data
+    const ci = previewCrop(imageRef.current, canvasRef.current, newCrop); 
     setTempCroppedImage(ci);
   };
 
@@ -55,6 +54,27 @@ const ImageDisplayArea = () => {
     }
   };
 
+  const renderImage=()=>{
+  if(isCropping){
+
+  }
+  else if(isResizing){
+
+  }
+  else if(isZooming){
+
+  }
+  else if(showRotationSlider){
+    console.log('disableRotation');
+    const renderedImage = previewCrop(imageRef.current, canvasRef.current, crop,1,degree); 
+    dispatch({ type: 'setCroppedImage', payload: renderedImage });
+    dispatch({ type: 'disableRotation' });
+  }
+  else{
+
+  }
+  }
+
   useEffect(() => {
     const a = `brightness(${brightness}%)`;
     setAdjustment(a);
@@ -64,7 +84,8 @@ const ImageDisplayArea = () => {
 
   return (
     <>
-      {isCropping && <button className={classes.done} onClick={cropImage}>Done</button>}
+      {(isCropping || isResizing || showRotationSlider) && <button className={classes.done} onClick={renderImage}>Done</button>}
+      <SVG_Filters/>
       <div
         className={classes.zoom_area}
         style={{
@@ -107,32 +128,7 @@ const ImageDisplayArea = () => {
         )}
         {originalImage && !isCropping && !isResizing && (
           <div style={{ width: '100%', height: '100%' }}>
-            {/* <img
-              ref={imageRef}
-              src={croppedImage || originalImage}
-              alt="image"
-              style={{
-                transform: `rotate(${degree}deg)`,
-                filter: adjustemnt,
-              }}
-            /> */}
-       
-            {console.log('custom filterx',customFilter)}
-             {/* <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg">
-        <SharpenFilter />
-        <GammaFilter />
-        <SepiaFilter/>
-        <GrayscaleFilter/>
-        <InvertFilter/>
-        <NegativeFilter/>
-        <filter id="custom_filter">
-         <feColorMatrix
-          type="matrix"
-         values="1  1  1  1  1  1  2  1  1  1  1  1  1  1  1  1  1  1  1  1"/>
-</filter>
-      </svg> */}
-      <SVG_Filters/>
-      <img src={croppedImage || originalImage} alt="" style={{ filter: appliedFilter ? `url(#${appliedFilter})` : 'none' }} />
+      <img src={croppedImage || originalImage} ref={imageRef} style={{ transform: `rotate(${degree}deg)`, filter: appliedFilter ? `url(#${appliedFilter})` : 'none' }} />
           </div>
         )}
 
