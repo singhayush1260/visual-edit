@@ -5,46 +5,42 @@ import { Resizable } from 're-resizable';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import PreviewCanvas from '../preview-canvas/PreviewCanvas';
-//import { cropAndScale } from '../../../../utils/cropAndScale';
-import useTransform from '../../../../hooks/useTransform';
-import useImageEditingAPI from '../../../../hooks/useImageEditingAPI';
+import { cropAndScale } from '../../../../utils/cropAndScale';
 import SVG_Filters from '../../../../components/editing-kit/filters/SVG_Filters';
 
 
-
 const ImageDisplayArea = () => {
-  
-  const [resizeDelta, setResizeDelta]=useState({});
   const [crop, setCrop] = useState({ aspect: 16 / 9 });
   const [adjustemnt, setAdjustment] = useState("");
-  const [croppedImagePreview, setCroppedImagePreview] = useState(null);
+  const [tempCroppedImage, setTempCroppedImage] = useState(null);
   const [zoomLevel, setZoomLevel] = useState(1);
-  const [resizedImageURL, setResizedImageURL] = useState(null);
 
-  const { imageName, originalImage, croppedImage } = useSelector((state) => state.imageUploadReducer);
+  const { originalImage, croppedImage } = useSelector((state) => state.imageUploadReducer);
   const { isZooming, isCropping, isResizing } = useSelector((state) => state.stateReducer);
   const { showPreview, rotation: degree } = useSelector((state) => state.transformationReducer);
   const { brightness, contrast, hue, saturation } = useSelector((state) => state.imageAdjustmentsReducer);
   const { noFilter,customFilter, appliedFilter } = useSelector((state) => state.filtersReducer);
-  const { originalDimension } = useSelector((state)=>state.imageReducer);
+
+  //console.log(appliedFilter);
 
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
   const dispatch = useDispatch();
 
-  const { cropAndScale, resizeImage } = useTransform();
-
-  const { editedImage, isLoading, error, editImage } = useImageEditingAPI();
-
   const handleCrop = async (newCrop) => {
     setCrop(newCrop);
     dispatch({ type: 'crop', payload: newCrop });
-    const preview = cropAndScale(imageRef.current, canvasRef.current, newCrop); 
-    setCroppedImagePreview(preview);
+    const ci = cropAndScale(imageRef.current, canvasRef.current, newCrop); // Use the new crop data
+    setTempCroppedImage(ci);
   };
 
   const cropReleased = () => {
     dispatch({ type: 'addCropHistory', payload: crop });
+  };
+
+  const cropImage = () => {
+    dispatch({ type: 'setCroppedImage', payload: tempCroppedImage });
+    dispatch({ type: 'disableCropping' });
   };
 
   const handleScrollZoom = (e) => {
@@ -59,48 +55,7 @@ const ImageDisplayArea = () => {
     }
   };
 
-  const handleResize=(delta)=>{
-   console.log(delta)
-   setResizeDelta(delta);
-  }
 
-
- const renderImage=()=>{
-  if(isZooming){
-    const renderedImage = cropAndScale(imageRef.current, canvasRef.current, crop, zoomLevel); 
-    setTempCroppedImage(renderedImage);
-    setZoomLevel(1);
-    dispatch({ type: 'disableZoom' });
-  }
-  else if(isCropping){
-    dispatch({ type: 'setCroppedImage', payload: croppedImagePreview });
-    dispatch({ type: 'disableCropping' });
-  }
-  else if(isResizing){
-    
-    const RESIZE_ENDPOINT='http://localhost:4000/api/edit/transform';
-
-
-    const newWidth = originalDimension.width - ( resizeDelta.width * -1 );
-    const newHeight = originalDimension.height - ( resizeDelta.height * -1 );
-
-    const editInfo={resize:{newWidth, newHeight}};
-
-
-    console.log('od',originalDimension);
-    console.log('newd',editInfo);
-
-    editImage(imageName,editInfo,RESIZE_ENDPOINT).then((a)=>{
-      console.log('aaaaaa',a);
-      dispatch({ type: 'setCroppedImage', payload: a });
-      dispatch({ type: 'disableResizing' });
-     window.open('/resized-image', '_blank'); // Open a new tab
-    })
-  }
-  else{
-
-  }
- }
   
 
   useEffect(() => {
@@ -112,7 +67,7 @@ const ImageDisplayArea = () => {
 
   return (
     <>
-      { (isCropping || isZooming || isResizing) && <button className={classes.done} onClick={renderImage}>Done</button>}
+      {isCropping || isZooming && <button className={classes.done} onClick={cropImage}>Done</button>}
       <div
         className={classes.zoom_area}
         style={{
@@ -134,34 +89,44 @@ const ImageDisplayArea = () => {
               src={croppedImage || originalImage}
               ref={imageRef}
               alt="image"
-              style={{ width:'100%', height:'100%', transform: `rotate(${degree}deg)` }}
+              style={{ transform: `rotate(${degree}deg)` }}
             />
           </ReactCrop>
         )}
-        {originalImage && !isCropping && !isZooming && isResizing && (
+        {originalImage && !isCropping && isResizing && (
+          <div style={{ width: '100%', height: '100%' }}>
             <Resizable
               defaultSize={{ width: '100%', height: '100%' }}
-              onResizeStop={(e, direction, ref, d) => handleResize(d)}
+              onResizeStop={(e, direction, ref, d) => console.log(d)}
             >
               <img
                 ref={imageRef}
                 src={croppedImage || originalImage}
                 alt="image"
+                style={{ transform: `rotate(${degree}deg)` }}
               />
             </Resizable>
+          </div>
         )}
         {originalImage && !isCropping && !isResizing && (
           <div style={{ width: '100%', height: '100%' }}>
+            {/* <img
+              ref={imageRef}
+              src={croppedImage || originalImage}
+              alt="image"
+              style={{
+                transform: `rotate(${degree}deg)`,
+                filter: adjustemnt,
+              }}
+            /> */}
        
       <SVG_Filters/>
-      {console.log('resizedImageURL',resizedImageURL)}
-      <img src={resizedImageURL || croppedImage || originalImage} alt="" style={{ filter: appliedFilter ? `url(#${appliedFilter})` : 'none' }} />
+      <img src={croppedImage || originalImage} alt="" style={{ filter: appliedFilter ? `url(#${appliedFilter})` : 'none' }} />
           </div>
         )}
-        
+
       </div>
       {showPreview && <PreviewCanvas pcRef={canvasRef} />}
-   
     </>
   );
 };

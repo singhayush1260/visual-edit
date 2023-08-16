@@ -2,6 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   showDraggableDialogBox:false,
+  isMoving:false,
   isCropping: false,
   isZooming:false,
   showRotationSlider: false,
@@ -10,12 +11,16 @@ const initialState = {
   addText:false,
   isEditing: false,
   showCustomFilterDialog:false,
-  currentEditType: "", // keeps track of current edit type
+  currentEditType: "", 
+  renderedImage:null
+
 };
 
 export const stateReducer = createReducer(initialState, {
     setEditingState: (state, action) => {
+    console.log('action.payload',action.payload)
     const editType=action.payload;
+    state.isMoving = editType === "move" ? !state.isMoving : false;
     state.isCropping = editType === "crop" ? !state.isCropping : false;
     state.isZooming = editType === "zoom" ? !state.isZooming : false;
     state.showRotationSlider = editType === "rotate" ? !state.showRotationSlider : false;
@@ -48,6 +53,12 @@ export const stateReducer = createReducer(initialState, {
   disableZoom: (state) => {
     state.isZooming = false;
   },
+  enableResizing: (state) => {
+    state.isResizing = !state.isResizing;
+  },
+  disableResizing: (state) => {
+    state.isResizing = false;
+  },
   toggleCustomFilterDialogVisibility:(state)=>{
     state.showCustomFilterDialog=!state.showCustomFilterDialog;
   },
@@ -55,4 +66,7 @@ export const stateReducer = createReducer(initialState, {
     state.currentEditType =
       state.currentEditType === "crop" ? "" : action.payload;
   },
+  setRenderedImage:(state, action)=>{
+    state.renderedImage=action.payload;
+  }
 });

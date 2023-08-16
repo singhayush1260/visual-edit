@@ -2,6 +2,7 @@ import classes from "./ImageCanvas.module.scss";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import ImageDisplayArea from "./image-display-area/ImageDisplayArea";
+import ImageDisplayArea1 from "./image-display-area/ImageDisplayArea1";
 import RealTimeCropData from '../../../components/real-time-crop-data/RealTimeCropData';
 
 const ImageCanvas = () => {

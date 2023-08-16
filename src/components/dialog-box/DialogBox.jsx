@@ -33,6 +33,7 @@ const DialogBox = () => {
                     height: image.naturalHeight
                 });
                 dispatch({ type: 'setOriginalDimension', payload: { width: image.naturalWidth, height: image.naturalHeight } });
+                dispatch({type:'setName',payload:selectedImage.name})
             };
 
             imageUploadHandler(selectedImage, API_ENDPOINT, imageLink);

@@ -3,7 +3,7 @@ import classes from './Toolbar.module.scss';
 import { TbResize } from 'react-icons/tb';
 import { AiOutlineRotateRight, AiOutlineZoomIn } from 'react-icons/ai';
 import { FcAddImage, FcRemoveImage } from 'react-icons/fc';
-import { BsCrop, BsPencil, BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs';
+import { BsCrop, BsPencil, BsFillMoonStarsFill, BsFillSunFill, BsArrowsMove } from 'react-icons/bs';
 import { PiTextTBold } from 'react-icons/pi';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 const Toolbar = () => {
   const { selectedImage } = useSelector((state) => state.imageUploadReducer);
   const { isDarkTheme } = useSelector((state) => state.themeReducer);
-  const { isZooming, isCropping, showRotationSlider, isResizing } = useSelector( (state) => state.stateReducer);
+  const { isMoving,isZooming, isCropping, showRotationSlider, isResizing } = useSelector( (state) => state.stateReducer);
 
   const dispatch = useDispatch();
 
@@ -22,6 +22,9 @@ const Toolbar = () => {
         break;
       case 'removeImage':
         removeImage();
+        break;
+      case 'move':
+        dispatch({type:'setEditingState',payload:'move'})
         break;
       case 'crop':
         dispatch({type:'setEditingState',payload:'crop'})
@@ -67,6 +70,9 @@ const Toolbar = () => {
             <FcRemoveImage />
           </div>
         )}
+        <div className={`${isMoving && classes.currently_active}`} title='Move' onClick={() => handleToolClick('move')}>
+          <BsArrowsMove/>
+        </div>
         <div className={`${isCropping && classes.currently_active}`} title='Crop' onClick={() => handleToolClick('crop')}>
           <BsCrop />
         </div>
