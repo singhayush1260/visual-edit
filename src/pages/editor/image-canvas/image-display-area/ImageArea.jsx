@@ -3,36 +3,39 @@ import classes from '../ImageCanvas.module.scss';
 import useTransform from '../../../../hooks/useTransform';
 import useUtilities from '../../../../hooks/useUtilities';
 import ReactCrop from 'react-image-crop';
+import { Resizable } from 're-resizable';
 import { useSelector, useDispatch } from 'react-redux';
 
 const ImageArea=({image:imageBlob})=>{
    
-    const dispatch=useDispatch();
+   const dispatch=useDispatch();
    const[rotatedImage, setRotatedImage]=useState(null);
+   const[resizedImage, setResizedImage]=useState(null);
    const[cropData, setCropData]=useState({ aspect: 1 / 1 });
+   const[resizeDelta, setResizeDelta]=useState({width:0, height:0});
 
    const canvasRef=useRef(null); 
    const imageRef=useRef(null);
 
-   const { crop, rotate } = useTransform(); //custom hook
+   const { crop, rotate, resize } = useTransform(); //custom hook
    const { base64ToBlobURL }=useUtilities();
 
 
    const { rotation: degree } = useSelector((state) => state.transformationReducer);
    const { tempRenderedImage } = useSelector((state) => state.imageUploadReducer);
    const { isZooming, isCropping, isResizing,  showRotationSlider } = useSelector((state) => state.stateReducer);
-   
+   const { originalDimension } = useSelector((state)=>state.imageReducer);
    
    useEffect(()=>{
     const loadImageOnCanvas=()=>{
         console.log('canvasImage',rotatedImage);
         const canvas=canvasRef.current;
         console.log('canvas',canvas);
-        if(!isCropping){
+        if(!isCropping && !isResizing){
             console.log('inside',canvas)
             const context=canvas.getContext('2d');
         const image=new Image();
-        image.src=rotatedImage || imageBlob;
+        image.src= imageBlob;
         image.onload=()=>{
             canvas.width=image.width;
             canvas.height=image.height;
@@ -42,7 +45,7 @@ const ImageArea=({image:imageBlob})=>{
     }
     loadImageOnCanvas();
     
-   },[imageBlob, rotatedImage,isCropping])
+   },[imageBlob, rotatedImage, isCropping, isResizing])
 
    const handleRotate = async () => {
     try {
@@ -53,7 +56,14 @@ const ImageArea=({image:imageBlob})=>{
     }
   };
 
-  const renderImage=()=>{
+  const handleResize=()=>{
+    try{
+
+    }
+    catch(error){}
+  }
+
+  const renderImage= async ()=>{
     if(isCropping){
         const croppedImageBase64=crop(imageRef.current,null,cropData);
         const croppedImageBlobURL=base64ToBlobURL(croppedImageBase64,"image/jpeg");
@@ -61,7 +71,12 @@ const ImageArea=({image:imageBlob})=>{
        console.log('cropped image',croppedImageBlobURL);
     }
     else if(isResizing){
-
+      const newWidth = originalDimension.width - ( resizeDelta.width * -1 );
+      const newHeight = originalDimension.height - ( resizeDelta.height * -1 );
+      const resizedImageBase64 = await resize(imageBlob, newWidth, newHeight);
+      const resizedImageBlobURL=base64ToBlobURL(resizedImageBase64,"image/jpeg");
+      console.log('resizedImageBase64',resizedImageBlobURL);
+      dispatch({type:'setTempRenderedImage',payload:resizedImageBlobURL});
     }
     else if(isZooming){
 
@@ -87,7 +102,18 @@ const ImageArea=({image:imageBlob})=>{
         >
         <img src={imageBlob} ref={imageRef} />
         </ReactCrop>}
-      { !isCropping && <canvas className={classes.canvas} ref={canvasRef} style={{transform:`rotate(${degree}deg)`}}/>}
+        {
+            isResizing &&  <Resizable
+            defaultSize={{ width: '100%', height: '100%' }}
+            onResizeStop={(e, direction, ref, d) => setResizeDelta(d)}
+          >
+            <img
+              src={imageBlob}
+              alt="image"
+            />
+          </Resizable>
+        }
+      { !isCropping && !isResizing && <canvas className={classes.canvas} ref={canvasRef} style={{transform:`rotate(${degree}deg)`}}/>}
         </div>
          {/* <button onClick={handleRotate}>Rotate</button> */}
       </>
